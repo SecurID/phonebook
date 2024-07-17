@@ -1,4 +1,6 @@
 <?php
+
+use App\Model\Phonebook;
 use PHPUnit\Framework\TestCase;
 
 class PhonebookTest extends TestCase {
@@ -22,5 +24,13 @@ class PhonebookTest extends TestCase {
 
     public function testTrue() {
         $this->assertTrue(true);
+    }
+
+    public function testAddEntryToPhonebook()
+    {
+        $phonebook = new Phonebook($this->pdo);
+        $phonebook->addEntry('Doe', 'John', '1234567890');
+        $stmt = $this->pdo->exec("SELECT * FROM phonebook WHERE lastname='Doe' AND firstname='John' AND phonenumber='1234567890'");
+        $this->assertEquals(1, $stmt);
     }
 }
