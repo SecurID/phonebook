@@ -7,5 +7,7 @@ $pdo->exec("CREATE TABLE IF NOT EXISTS phonebook (
     id INTEGER PRIMARY KEY,
     lastname TEXT NOT NULL,
     firstname TEXT NOT NULL,
-    phonenumber TEXT NOT NULL
+    phonenumber TEXT NOT NULL,
+    lastname_t9 INT NOT NULL,
+    firstname_t9 INT NOT NULL
 )");

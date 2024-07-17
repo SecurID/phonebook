@@ -2,6 +2,8 @@
 
 namespace App\Model;
 
+use App\Helper\T9Search;
+
 class Phonebook
 {
     private \PDO $pdo;
@@ -13,20 +15,26 @@ class Phonebook
 
     public function addEntry($lastname, $firstname, $phonenumber): void
     {
-        $query = $this->pdo->prepare('INSERT INTO phonebook (lastname, firstname, phonenumber) VALUES (:lastname, :firstname, :phonenumber)');
-        $query->execute(compact('lastname', 'firstname', 'phonenumber'));
+        $lastname_t9 = T9Search::generateT9Sequence($lastname);
+        $firstname_t9 = T9Search::generateT9Sequence($firstname);
+
+        $query = $this->pdo->prepare('INSERT INTO 
+            phonebook (lastname, firstname, phonenumber, lastname_t9, firstname_t9) 
+            VALUES 
+            (:lastname, :firstname, :phonenumber, :lastname_t9, :firstname_t9)
+        ');
+        $query->execute(compact('lastname', 'firstname', 'phonenumber', 'lastname_t9', 'firstname_t9'));
     }
 
     public function searchEntries($digits): array
     {
-        return [[
-            'lastname' => 'Doe',
-            'firstname' => 'John',
-            'phonenumber' => '1234567890'
-        ], [
-            'lastname' => 'Doe',
-            'firstname' => 'Melanie',
-            'phonenumber' => '1234567890'
-        ]];
+        $stmt = $this->pdo->prepare("SELECT firstname, lastname, phonenumber 
+            FROM phonebook 
+            WHERE firstname_t9 LIKE ? 
+               OR lastname_t9 LIKE ? 
+               OR phonenumber LIKE ?");
+        $likeInput = $digits . '%';
+        $stmt->execute([$likeInput, $likeInput, $likeInput]);
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 }
