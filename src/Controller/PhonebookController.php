@@ -10,9 +10,19 @@ class PhonebookController
     public function addEntry(): void
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $lastname = $_POST['lastname'];
-            $firstname = $_POST['firstname'];
-            $phonenumber = $_POST['phonenumber'];
+            $lastname = trim($_POST['lastname']);
+            $firstname = trim($_POST['firstname']);
+            $phonenumber = trim($_POST['phonenumber']);
+
+            if (empty($lastname) || empty($firstname) || empty($phonenumber)) {
+                echo "All fields are required.";
+                return;
+            }
+
+            if (!preg_match('/^\d+$/', $phonenumber)) {
+                echo "Phone number must be digits only.";
+                return;
+            }
 
             $model = new Phonebook(Database::getInstance()->getConnection());
             $model->addEntry($lastname, $firstname, $phonenumber);

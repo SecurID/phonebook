@@ -16,5 +16,4 @@ class Phonebook
         $query = $this->pdo->prepare('INSERT INTO phonebook (lastname, firstname, phonenumber) VALUES (:lastname, :firstname, :phonenumber)');
         $query->execute(compact('lastname', 'firstname', 'phonenumber'));
     }
-
 }
