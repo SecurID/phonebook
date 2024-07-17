@@ -13,6 +13,8 @@ if ($uri === '/' || $uri === '') {
     $controller->showForm();
 } elseif ($uri === '/add') {
     $controller->addEntry();
+} elseif ($uri === '/search') {
+    $controller->searchEntries();
 } else {
     header('HTTP/1.1 404 Not Found');
     echo '404 Not Found';

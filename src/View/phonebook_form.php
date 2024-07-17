@@ -26,7 +26,7 @@
 <form action="/search" method="get" class="bg-white shadow-md rounded px-8 pt-6 pb-8 w-full max-w-sm">
     <div class="mb-4">
         <label for="input" class="block text-gray-700 text-sm font-bold mb-2">Search:</label>
-        <input type="text" id="input" name="input" placeholder="567" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+        <input type="text" id="search" name="search" placeholder="567" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
     </div>
     <div class="flex items-center justify-between">
         <input type="submit" value="Search"  class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">

@@ -7,6 +7,13 @@ use App\Model\Phonebook;
 
 class PhonebookController
 {
+    private Phonebook $model;
+
+    public function __construct()
+    {
+        $this->model = new Phonebook(Database::getInstance()->getConnection());
+    }
+
     public function addEntry(): void
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -24,10 +31,21 @@ class PhonebookController
                 return;
             }
 
-            $model = new Phonebook(Database::getInstance()->getConnection());
-            $model->addEntry($lastname, $firstname, $phonenumber);
+            $this->model->addEntry($lastname, $firstname, $phonenumber);
             header('Location: /');
         }
+    }
+
+    public function searchEntries(): void
+    {
+        $entries = [];
+
+        if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['search'])){
+            $digits = trim($_GET['search']);
+            $entries = $this->model->searchEntries($digits);
+        }
+
+        include __DIR__ . '/../View/phonebook_table.php';
     }
 
     public function showForm(): void
