@@ -33,7 +33,7 @@
     <?php endif; ?>
     <a href="/">
         <div class="bg-blue-500 hover:bg-blue-700 text-white mt-10 max-w-fit font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-            <- Home
+            Back
         </div>
     </a>
 </div>

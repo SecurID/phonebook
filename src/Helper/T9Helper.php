@@ -2,7 +2,17 @@
 
 namespace App\Helper;
 
-class T9Search {
+/**
+ * Helper Class to generate T9 Sequence of a given string
+ * Class T9Helper
+ * @package App\Helper
+ *
+ * @property static array $t9_map
+ */
+class T9Helper {
+    /**
+     * @var array|array[]
+     */
     static array $t9_map = [
         '2' => ['a', 'b', 'c'],
         '3' => ['d', 'e', 'f'],
@@ -14,6 +24,12 @@ class T9Search {
         '9' => ['w', 'x', 'y', 'z']
     ];
 
+    /**
+     * Generates a T9 Sequence of a given string
+     *
+     * @param $string
+     * @return int
+     */
     public static function generateT9Sequence($string): int {
         $string = strtolower($string);
         $sequence = '';
@@ -23,7 +39,7 @@ class T9Search {
         }
 
         foreach(str_split($string) as $char) {
-            foreach(T9Search::$t9_map as $digit => $letters) {
+            foreach(T9Helper::$t9_map as $digit => $letters) {
                 if (in_array($char, $letters)) {
                     $sequence .= $digit;
                     break;

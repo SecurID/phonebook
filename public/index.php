@@ -2,11 +2,10 @@
 require __DIR__ . '/../vendor/autoload.php';
 
 use App\Controller\PhonebookController;
-use App\Database\Database;
 
-$pdo = Database::getInstance()->getConnection();
 $controller = new PhonebookController();
 
+// Default Router implementation. Could be a more suitable router for a bigger project
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
 if ($uri === '/' || $uri === '') {

@@ -1,19 +1,19 @@
 <?php
 
-use App\Helper\T9Search;
+use App\Helper\T9Helper;
 use PHPUnit\Framework\TestCase;
 
-class T9SearchTest extends TestCase {
+class T9HelperTest extends TestCase {
 
-    public function testT9Search()
+    public function testT9Generator()
     {
-        $return = T9Search::generateT9Sequence('Doe');
+        $return = T9Helper::generateT9Sequence('Doe');
         $this->assertEquals('363', $return);
     }
 
-    public function testT9SearchNumber()
+    public function testT9GeneratorNumber()
     {
-        $return = T9Search::generateT9Sequence(123);
+        $return = T9Helper::generateT9Sequence(123);
         $this->assertEquals('123', $return);
     }
 }

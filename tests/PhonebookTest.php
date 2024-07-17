@@ -89,4 +89,19 @@ class PhonebookTest extends TestCase {
         ];
         $this->assertEquals($expected, $results);
     }
+
+    public function testSearchEntriesWithEmptyInput()
+    {
+        $results = $this->phonebook->searchEntries('');
+        $expected = [
+            ['firstname' => 'Pia', 'lastname' => 'Müller', 'phonenumber' => '123456789'],
+            ['firstname' => 'Anna', 'lastname' => 'Meyer', 'phonenumber' => '987654321'],
+            ['firstname' => 'Max', 'lastname' => 'Mustermann', 'phonenumber' => '123456789'],
+            ['firstname' => 'John', 'lastname' => 'Goodman', 'phonenumber' => '465783920'],
+            ['firstname' => 'Mary', 'lastname' => 'Goodman', 'phonenumber' => '466372839'],
+            ['firstname' => 'Sam', 'lastname' => 'Rahmen', 'phonenumber' => '555123456'],
+            ['firstname' => 'Téo', 'lastname' => 'Marqués', 'phonenumber' => '555987654']
+        ];
+        $this->assertEquals($expected, $results);
+    }
 }
